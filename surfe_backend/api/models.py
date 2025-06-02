@@ -1,3 +1,15 @@
 from django.db import models
 
 # Create your models here.
+
+class User(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255)
+    created_at = models.DateTimeField()
+
+class Action(models.Model):
+    id = models.AutoField(primary_key=True)
+    type = models.CharField(max_length=255)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    target_user = models.IntegerField(null=True, blank=True)
+    created_at = models.DateTimeField()
