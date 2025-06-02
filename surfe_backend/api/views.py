@@ -34,3 +34,23 @@ def get_action_type_breakdown(request, action_type):
     breakdown = Counter(next_action_types)
     result = {action_type: count / total_actions for action_type, count in breakdown.items()}
     return JsonResponse(result)
+
+def calculate_referral_index(request):
+    referral_index = {}
+    users = User.objects.all()
+
+    for user in users:
+        referred_users = set()
+        stack = [user.id]
+
+        while stack:
+            current_user_id = stack.pop()
+            actions = Action.objects.filter(type='REFER_USER', user_id=current_user_id)
+            for action in actions:
+                if action.target_user not in referred_users:
+                    referred_users.add(action.target_user)
+                    stack.append(action.target_user)
+
+        referral_index[user.id] = len(referred_users)
+
+    return JsonResponse(referral_index)
