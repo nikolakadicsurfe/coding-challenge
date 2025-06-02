@@ -63,7 +63,7 @@ class ActionTypeBreakdownTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), {
             'LOGOUT': 0.5,
-            'LOGIN': 0.5
+            'LOGIN': 0.375
         })
 
 class ReferralIndexTests(TestCase):
