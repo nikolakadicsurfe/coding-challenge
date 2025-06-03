@@ -10,7 +10,3 @@ Global (default): Counts all transitions equally. Shows total usage trends.
 Per-user average: Each user has equal weight. Shows typical user behavior.
 
 Use the method that fits your analysis goal.
-
-
-
-
